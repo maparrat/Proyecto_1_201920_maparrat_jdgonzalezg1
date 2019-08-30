@@ -3,11 +3,10 @@
 1) ? Documentación de los requerimientos funcionales (incluyendo la descripción, los
 datos de entrada, los datos de salida y estimación de complejidad temporal de cada
 requerimiento funcional)
-2)? Diseño de las Estructuras de Datos a utilizar (diagrama de clases UML, imagen)
+
 3)? Diseño de la Solución al proyecto haciendo explícito el uso de las Estructuras de
 Datos (diagrama de clases UML, imagen)
 
-4)? Implementación y Pruebas Unitarias Automáticas de las Estructuras de Datos
-(Eclipse/Java)
-5)? Lectura/carga de los datos para un trimestre dado por el usuario. Mostrar el reporte
+
+5) Mostrar el reporte
 de los resultados descritos en la sección Carga de Información.
