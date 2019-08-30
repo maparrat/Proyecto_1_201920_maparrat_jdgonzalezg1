@@ -1,12 +1,13 @@
 
 
-1) ? Documentaci髇 de los requerimientos funcionales (incluyendo la descripci髇, los
-datos de entrada, los datos de salida y estimaci髇 de complejidad temporal de cada
+1) Documentaci贸n de los requerimientos funcionales (incluyendo la descripci贸n, los
+datos de entrada, los datos de salida y estimaci贸n de complejidad temporal de cada
 requerimiento funcional)
 
-3)? Dise駉 de la Soluci髇 al proyecto haciendo expl韈ito el uso de las Estructuras de
-Datos (diagrama de clases UML, imagen)
+2) Dise帽o de la Soluci贸n al proyecto haciendo expl铆cito el uso de las Estructuras de
+Datos (diagrama de clases UML, imagen): UML con todo el programa (excepto los test) 
+, y la clase MVCModelo con los metodos de los requerimientos
 
 
-5) Mostrar el reporte
-de los resultados descritos en la secci髇 Carga de Informaci髇.
+3) Mostrar el reporte
+de los resultados descritos en la secci贸n Carga de Informaci贸n.
