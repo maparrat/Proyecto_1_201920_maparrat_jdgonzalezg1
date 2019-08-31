@@ -1,13 +1,6 @@
 
 
-1) Documentación de los requerimientos funcionales (incluyendo la descripción, los
-datos de entrada, los datos de salida y estimación de complejidad temporal de cada
-requerimiento funcional)
-
-2) Diseño de la Solución al proyecto haciendo explícito el uso de las Estructuras de
-Datos (diagrama de clases UML, imagen): UML con todo el programa (excepto los test) 
-, y la clase MVCModelo con los metodos de los requerimientos
-
+1)Puse complejidad O(N) o O(1) pero toca prguntar
 
 3) Mostrar el reporte
 de los resultados descritos en la sección Carga de Información.

@@ -202,4 +202,39 @@ public class MVCModelo {
 		
 		
 	}	
+	//Metodos proyecto
+	public double consultarTiempoPromedioMes(String pzona, int pmes)
+	{
+		return 0;
+	}
+	public Queue mejoresPromediosMes(int  n, int mes )
+	{
+		return null; 
+	}
+	public String compararTiemposPromedioMes(int mes, String zonaMenor, String zonaMayor, String zonaX)
+	{
+		return null; 
+	}
+	public double consultarTiempoPromedioDia(String pzona, int pdia)
+	{
+		return 0;
+	}
+	public Queue mejoresPromediosDia(int  n, int pdia )
+	{
+		return null; 
+	}
+	public String compararTiemposPromedioDia(int dia, String zonaMenor, String zonaMayor, String zonaX)
+	{
+		return null; 
+	}
+	public Queue viejesHoras(int horaInicio, int horaFin)
+	{
+		return null;
+	}
+	public void generarTabla(String zonaA, String zonaB)
+	{
+		
+	}
+
+	
 }
