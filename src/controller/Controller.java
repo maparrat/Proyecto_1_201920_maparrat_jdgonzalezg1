@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import model.logic.MVCModelo;
@@ -15,7 +16,6 @@ public class Controller {
 	
 	/**
 	 * Crear la vista y el modelo del proyecto
-	 * @param capacidad tamaNo inicial del arreglo
 	 */
 	public Controller ()
 	{
@@ -27,67 +27,69 @@ public class Controller {
 	{
 		Scanner lector = new Scanner(System.in);
 		boolean fin = false;
-		String dato = "";
-		String respuesta = "";
 
 		while( !fin ){
+
 			view.printMenu();
 
-			int option = lector.nextInt();
-			switch(option){
+			String in;
+			in = lector.next();
+
+			int option;
+
+			try
+			{
+				option = Integer.parseInt(in);
+			}
+			catch(NumberFormatException e)
+			{
+				option = 0;
+			}
+				
+			switch(option)
+			{
 				case 1:
-					System.out.println("--------- \nCrear Arreglo \nDar capacidad inicial del arreglo: ");
-				    int capacidad = lector.nextInt();
-				    modelo = new MVCModelo(capacidad); 
-					System.out.println("Arreglo Dinamico creado");
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
-
-				case 2:
-					System.out.println("--------- \nDar cadena (simple) a ingresar: ");
-					dato = lector.next();
-					modelo.agregar(dato);
-					System.out.println("Dato agregado");
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
-
-				case 3:
-					System.out.println("--------- \nDar cadena (simple) a buscar: ");
-					dato = lector.next();
-					respuesta = modelo.buscar(dato);
-					if ( respuesta != null)
+					int numeroTrimestre;
+					try
 					{
-						System.out.println("Dato encontrado: "+ respuesta);
+						System.out.println("--------- \nCargar archivo \nDar numero del trimestre: ");
+						numeroTrimestre = lector.nextInt();
+					}
+					catch(InputMismatchException e)
+					{
+						System.out.println("Debe ingresar un valor numérico (1 o 2)\n---------");
+						break;
+					}
+
+					if(numeroTrimestre > 0 && numeroTrimestre <= 4)
+					{
+						try
+						{
+							modelo.cargarArchivoCSVMonthly(numeroTrimestre);
+							modelo.cargarArchivoCSVWeekly(numeroTrimestre);
+							modelo.cargarArchivoCSVHourly(numeroTrimestre);
+							
+							System.out.println("Archivo cargado");
+							
+							System.out.println("Total de viajes en el archivo de meses: " + modelo.darTamanoMonthly());
+							System.out.println("Total de viajes en el archivo de semanas: " + modelo.darTamanoWeekly());
+							System.out.println("Total de viajes en el archivo de horas: " + modelo.darTamanoHourly());
+
+							System.out.println("La zona con menor identificador en todos los archivos del trimestre es: " + modelo.zonaConMenorIdentificador());
+							System.out.println("La zona con mayor identificador en todos los archivos del trimestre es: " + modelo.zonaConMayorIdentificador() + "\n---------");
+						}
+						catch (Exception e)
+						{
+							System.out.println("Se ha producido un error al cargar el archivo\n---------");
+						}
 					}
 					else
 					{
-						System.out.println("Dato NO encontrado");
+						System.out.println("Ingrese un valor válido (de 1 a 4)\n---------");	
 					}
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
 					break;
-
-				case 4:
-					System.out.println("--------- \nDar cadena (simple) a eliminar: ");
-					dato = lector.next();
-					respuesta = modelo.eliminar(dato);
-					if ( respuesta != null)
-					{
-						System.out.println("Dato eliminado "+ respuesta);
-					}
-					else
-					{
-						System.out.println("Dato NO eliminado");							
-					}
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
-
-				case 5: 
-					System.out.println("--------- \nContenido del Arreglo: ");
-					view.printModelo(modelo);
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;	
 					
-				case 6: 
+				case 11: 
 					System.out.println("--------- \n Hasta pronto !! \n---------"); 
 					lector.close();
 					fin = true;

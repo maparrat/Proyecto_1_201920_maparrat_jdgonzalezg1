@@ -16,26 +16,25 @@ public class MVCModelo {
 	/**
 	 * Atributos del modelo del mundo
 	 */
-	private Stack stackWeekly;
-
 	private Queue queueMonthly;
 	
 	private Queue queueHourly;
 
+	private Stack stackWeekly;
+	
 	/**
-	 * Constructor del modelo del mundo con capacidad predefinida
+	 * Constructor del modelo del mundo
 	 */
 	public MVCModelo()
 	{
-		stackWeekly = new Stack();
 		queueMonthly = new Queue();
-		
 		queueHourly = new Queue();
+		stackWeekly = new Stack();
 	}
 
 	/**
-	 * Servicio de consulta de numero de elementos presentes en el modelo 
-	 * @return numero de elementos presentes en el modelo
+	 * Servicio de consulta de numero de elementos presentes en la cola de datos mensuales
+	 * @return numero de elementos presentes en la cola de datos mensuales
 	 */
 	public int darTamanoMonthly()
 	{
@@ -43,8 +42,8 @@ public class MVCModelo {
 	}
 
 	/**
-	 * Servicio de consulta de numero de elementos presentes en el modelo 
-	 * @return numero de elementos presentes en el modelo
+	 * Servicio de consulta de numero de elementos presentes en la pila de datos semanales
+	 * @return numero de elementos presentes en la pila de datos semanales
 	 */
 	public int darTamanoWeekly()
 	{
@@ -52,18 +51,67 @@ public class MVCModelo {
 	}
 	
 	/**
-	 * Servicio de consulta de numero de elementos presentes en el modelo 
-	 * @return numero de elementos presentes en el modelo
+	 * Servicio de consulta de numero de elementos presentes en la cola de datos por hora
+	 * @return numero de elementos presentes en la cola de datos por hora
 	 */
 	public int darTamanoHourly()
 	{
 		return queueHourly.darNumeroElementos();
 	}
+
+	/**
+	 * Retorna el primer dato guardado en la cola de datos mensuales
+	 * @return el primer dato guardado en la cola de datos mensuales
+	 */
+	public Double[] darPrimerDatoMonthly()
+	{
+		return (Double[]) queueMonthly.darPrimerDato();
+	}
+
+	/**
+	 * Retorna el último dato guardado en la cola de datos mensuales
+	 * @return el último dato guardado en la cola de datos mensuales
+	 */
+	public Double[] darUltimoDatoMonthly()
+	{
+		return (Double[]) queueMonthly.darUltimoDato();
+	}
 	
 	/**
-	 * Metodo que carga el archivo CSV
+	 * Retorna el primer dato guardado en la pila de datos semanales
+	 * @return el primer dato guardado en la pila de datos semanales
 	 */
-	public int cargarArchivoCSVMonthly(int trimestre) throws Exception
+	public Double[] darElementoSuperiorWeekly()
+	{
+		return (Double[]) queueMonthly.darPrimerDato();
+	}	
+	
+	/**
+	 * Retorna el primer dato guardado en la cola de datos por hora
+	 * @return el primer dato guardado en la cola de datos por hora
+	 */
+	public Double[] darPrimerDatoHourly()
+	{
+		return (Double[]) queueHourly.darPrimerDato();
+	}
+
+	/**
+	 * Retorna el último dato guardado en la cola de datos por hora
+	 * @return el último dato guardado en la cola de datos por hora
+	 */
+	public Double[] darUltimoDatoHourly()
+	{
+		return (Double[]) queueHourly.darUltimoDato();
+	}
+	
+    // -------------------------------------------------------------
+    // Métodos de los requerimientos
+    // -------------------------------------------------------------
+	
+	/**
+	 * Metodo que carga el archivo CSV de datos mensuales
+	 */
+	public void cargarArchivoCSVMonthly(int trimestre) throws Exception
 	{
 		boolean primeraLectura = true;
 
@@ -80,13 +128,12 @@ public class MVCModelo {
 			primeraLectura = false;
 		}
 		reader.close();
-		return queueMonthly.darNumeroElementos();
 	}	
 	
 	/**
-	 * Metodo que carga el archivo CSV
+	 * Metodo que carga el archivo CSV de datos semanales
 	 */
-	public int cargarArchivoCSVWeekly(int trimestre) throws Exception
+	public void cargarArchivoCSVWeekly(int trimestre) throws Exception
 	{
 		boolean primeraLectura = true;
 
@@ -102,13 +149,12 @@ public class MVCModelo {
 			primeraLectura = false;
 		}
 		reader.close();
-		return stackWeekly.darNumeroElementos();
 	}		
 	
 	/**
-	 * Metodo que carga el archivo CSV
+	 * Metodo que carga el archivo CSV de datos por hora
 	 */
-	public int cargarArchivoCSVHourly(int trimestre) throws Exception
+	public void cargarArchivoCSVHourly(int trimestre) throws Exception
 	{
 		boolean primeraLectura = true;
 
@@ -125,104 +171,35 @@ public class MVCModelo {
 			primeraLectura = false;
 		}
 		reader.close();
-		return queueHourly.darNumeroElementos();
-	}	
-
-	/**
-	 * Retorna el primer dato guardado
-	 * @return el primer dato guardado
-	 */
-	public Double[] darPrimerDato()
-	{
-		return (Double[]) queueMonthly.darPrimerDato();
 	}
-
-	/**
-	 * Retorna el último dato guardado
-	 * @return el último dato guardado
-	 */
-	public Double[] darUltimoDato()
+	
+	public int zonaConMenorIdentificador()
 	{
-		return (Double[]) queueMonthly.darUltimoDato();
-	}
-
-	/**
-	 * Retorna una cola con el cluster más grande
-	 * @param horaInicial la hora desde la que se va a hacer la búsqueda
-	 * @return la cola con el cluster más grande
-	 */
-	public Queue darClusterMasGrande(int horaInicial)
-	{
-		Queue respuesta = new Queue();
-		Queue actual = new Queue();
-		double horaActual = horaInicial;
-
-		while(queueMonthly.darNumeroElementos()>0)
-		{
-			Double[] datoActual = (Double[]) queueMonthly.dequeue();
-
-			if(datoActual[2] >= horaActual)
-			{
-				actual.enqueue(datoActual);
-				horaActual = datoActual[2];
-			}
-			else if(actual.darNumeroElementos() > respuesta.darNumeroElementos())
-			{
-				while(respuesta.darNumeroElementos()>0)
-				{
-					respuesta.dequeue();
-				}
-
-				while(actual.darNumeroElementos()>0)
-				{
-					respuesta.enqueue(actual.dequeue());
-				}
-				horaActual = horaInicial;
-				
-				if(datoActual[2] >= horaActual)
-				{
-					actual.enqueue(datoActual);
-					horaActual = datoActual[2];
-				}
-			}
-			else
-			{
-				while(actual.darNumeroElementos()>0)
-				{
-					actual.dequeue();
-				}
-				horaActual = horaInicial;
-				
-				if(datoActual[2] >= horaActual)
-				{
-					actual.enqueue(datoActual);
-					horaActual = datoActual[2];
-				}
-			}	
-		}
-
-		return respuesta;
-	}
-
-	/**
-	 * Retorna una cola con los últimos N viajes según la hora especificada
-	 * @param numViajes N, número de viajes a buscar
-	 * @param hora Hora a buscar
-	 * @return una cola con los últimos viajes según la hora dada
-	 */
-	public Queue darUltimosViajesSegunHora(int numViajes, int hora)
-	{
-		Queue respuesta = new Queue();
+		int respuesta = -1;
 		
-		while(respuesta.darNumeroElementos() < numViajes && stackWeekly.darNumeroElementos() > 0)
-		{
-			Double[] datos = (Double[]) stackWeekly.pop();
-			
-			if(datos[2] == hora)
-			{
-				respuesta.enqueue(datos);
-			}			
-		}		
-		return respuesta;
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
+	
+	public int zonaConMayorIdentificador()
+	{
+		int respuesta = -1;
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}	
 }

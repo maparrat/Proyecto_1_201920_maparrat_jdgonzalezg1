@@ -19,4 +19,10 @@ public interface IStack <T>
 	 * @return el número de elementos de la pila
 	 */
 	public int darNumeroElementos();
+	
+	/**
+	 * Retorna el elemento que está en la parte de arriba de la pila
+	 * @return el último elemento agregado a la pila
+	 */
+	public T darElementoSuperior();
 }

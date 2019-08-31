@@ -68,4 +68,9 @@ public class Stack<T> implements IStack<T>
 	{
 		return numeroElementos;
 	}
+	
+	public T darElementoSuperior()
+	{
+		return (T) top;
+	}
 }
