@@ -3,5 +3,3 @@
 2)Nuevo UML con la estructura de datos
 
 3)Nuevo UML completo
-
-4)Pruebas unitarias
