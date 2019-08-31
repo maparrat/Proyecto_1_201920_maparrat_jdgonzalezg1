@@ -21,8 +21,8 @@ public interface IStack <T>
 	public int darNumeroElementos();
 	
 	/**
-	 * Retorna el elemento que está en la parte de arriba de la pila
-	 * @return el último elemento agregado a la pila
+	 * Retorna el nodo que está en la parte de arriba de la pila
+	 * @return el nodo del último elemento agregado a la pila
 	 */
-	public T darElementoSuperior();
+	public Node darNodoSuperior();
 }

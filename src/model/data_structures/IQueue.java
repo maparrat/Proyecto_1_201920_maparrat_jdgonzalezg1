@@ -21,14 +21,14 @@ public interface IQueue <T>
 	public int darNumeroElementos();
 	
 	/**
-	 * Retorna el primer dato de la cola
-	 * @return el primer dato de la cola
+	 * Retorna el primer nodo de la cola
+	 * @return el primer nodo de la cola
 	 */
-	public T darPrimerDato();
+	public Node darPrimerNodo();
 	
 	/**
-	 * Retorna el último dato de la cola
-	 * @return el último dato de la cola
+	 * Retorna el último nodo de la cola
+	 * @return el último nodo de la cola
 	 */
-	public T darUltimoDato();
+	public Node darUltimoNodo();
 }

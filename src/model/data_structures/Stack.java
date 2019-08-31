@@ -2,75 +2,48 @@ package model.data_structures;
 
 public class Stack<T> implements IStack<T>
 {
-	private T[] elementos;
-	private int tamanio;
 	private int numeroElementos;
-	private T top;
+	private Node top;
 
 	public Stack()
 	{
-		tamanio = 1;
-		elementos = (T[]) new Object[tamanio];
 		numeroElementos = 0;
 	}
 
 	public void push(T item)
 	{
-		if(numeroElementos == tamanio)
+		if(top == null)
 		{
-			tamanio = tamanio*2;	
-
-			T[] copia = elementos;
-			elementos = (T[]) new Object[tamanio];
-			for(int i = 0; i < numeroElementos; i++)
-			{
-				elementos[i] = copia[i];
-			} 
+			top = new Node();
+			top.asignarDato(item);			
 		}
-
-		elementos[numeroElementos] = item;
-		top = item;
+		else
+		{
+			Node nuevo = new Node();
+			nuevo.asignarDato(item);
+			nuevo.asignarSiguiente(top);
+			top = nuevo;
+		}
 		numeroElementos++;
 	}
 
 	public T pop() 
 	{
-		T respuesta = top;
+		T respuesta = (T) top.darDato();
 
-		elementos[numeroElementos-1] = null;
-		if(numeroElementos>1)
-		{
-			top = elementos[numeroElementos-2];
-		}
-		else
-		{
-			top = null;
-		}
-		
+		top = top.darSiguente();
 		numeroElementos --;
 
-		if(numeroElementos <= (tamanio/4))
-		{
-			tamanio = tamanio/2;	
-
-			T[] copia = elementos;
-			elementos = (T[]) new Object[tamanio];
-			for(int i = 0; i < numeroElementos; i++)
-			{
-				elementos[i] = copia[i];
-			} 
-		}
-
-		return respuesta;		
+		return respuesta;
 	}
 
 	public int darNumeroElementos()
 	{
 		return numeroElementos;
 	}
-	
-	public T darElementoSuperior()
+
+	public Node darNodoSuperior()
 	{
-		return (T) top;
+		return top;
 	}
 }

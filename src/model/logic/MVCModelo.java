@@ -4,7 +4,6 @@ import java.io.FileReader;
 
 import com.opencsv.CSVReader;
 
-import model.data_structures.INode;
 import model.data_structures.Node;
 import model.data_structures.Queue;
 import model.data_structures.Stack;
@@ -17,11 +16,11 @@ public class MVCModelo {
 	 * Atributos del modelo del mundo
 	 */
 	private Queue queueMonthly;
-	
+
 	private Queue queueHourly;
 
 	private Stack stackWeekly;
-	
+
 	/**
 	 * Constructor del modelo del mundo
 	 */
@@ -49,7 +48,7 @@ public class MVCModelo {
 	{
 		return stackWeekly.darNumeroElementos();
 	}
-	
+
 	/**
 	 * Servicio de consulta de numero de elementos presentes en la cola de datos por hora
 	 * @return numero de elementos presentes en la cola de datos por hora
@@ -60,54 +59,54 @@ public class MVCModelo {
 	}
 
 	/**
-	 * Retorna el primer dato guardado en la cola de datos mensuales
-	 * @return el primer dato guardado en la cola de datos mensuales
+	 * Retorna el primer Nodo en la cola de datos mensuales
+	 * @return el primer Nodo en la cola de datos mensuales
 	 */
-	public Double[] darPrimerDatoMonthly()
+	public Node darPrimerNodoMonthly()
 	{
-		return (Double[]) queueMonthly.darPrimerDato();
+		return queueMonthly.darPrimerNodo();
 	}
 
 	/**
-	 * Retorna el último dato guardado en la cola de datos mensuales
-	 * @return el último dato guardado en la cola de datos mensuales
+	 * Retorna el último Nodo en la cola de datos mensuales
+	 * @return el último Nodo en la cola de datos mensuales
 	 */
-	public Double[] darUltimoDatoMonthly()
+	public Node darUltimoNodoMonthly()
 	{
-		return (Double[]) queueMonthly.darUltimoDato();
+		return queueMonthly.darUltimoNodo();
 	}
-	
+
 	/**
-	 * Retorna el primer dato guardado en la pila de datos semanales
-	 * @return el primer dato guardado en la pila de datos semanales
+	 * Retorna el Nodo superior en la pila de datos semanales
+	 * @return el Nodo superior en la pila de datos semanales
 	 */
-	public Double[] darElementoSuperiorWeekly()
+	public Node darNodoSuperiorWeekly()
 	{
-		return (Double[]) queueMonthly.darPrimerDato();
+		return queueMonthly.darPrimerNodo();
 	}	
-	
+
 	/**
-	 * Retorna el primer dato guardado en la cola de datos por hora
-	 * @return el primer dato guardado en la cola de datos por hora
+	 * Retorna el primer Nodo en la cola de datos por hora
+	 * @return el primer Nodo en la cola de datos por hora
 	 */
-	public Double[] darPrimerDatoHourly()
+	public Node darPrimerNodoHourly()
 	{
-		return (Double[]) queueHourly.darPrimerDato();
+		return queueHourly.darPrimerNodo();
 	}
 
 	/**
-	 * Retorna el último dato guardado en la cola de datos por hora
-	 * @return el último dato guardado en la cola de datos por hora
+	 * Retorna el último Nodo en la cola de datos por hora
+	 * @return el último Nodo en la cola de datos por hora
 	 */
-	public Double[] darUltimoDatoHourly()
+	public Node darUltimoNodoHourly()
 	{
-		return (Double[]) queueHourly.darUltimoDato();
+		return queueHourly.darPrimerNodo();
 	}
-	
-    // -------------------------------------------------------------
-    // Métodos de los requerimientos
-    // -------------------------------------------------------------
-	
+
+	// -------------------------------------------------------------
+	// Métodos de carga de archivos
+	// -------------------------------------------------------------
+
 	/**
 	 * Metodo que carga el archivo CSV de datos mensuales
 	 */
@@ -122,14 +121,14 @@ public class MVCModelo {
 			if(!primeraLectura)
 			{
 				Double[] dato = {Double.parseDouble(line[0]), Double.parseDouble(line[1]), Double.parseDouble(line[2]), Double.parseDouble(line[3]), Double.parseDouble(line[4]), Double.parseDouble(line[5]), Double.parseDouble(line[6])}; 
-				
+
 				queueMonthly.enqueue(dato);
 			}
 			primeraLectura = false;
 		}
 		reader.close();
 	}	
-	
+
 	/**
 	 * Metodo que carga el archivo CSV de datos semanales
 	 */
@@ -150,7 +149,7 @@ public class MVCModelo {
 		}
 		reader.close();
 	}		
-	
+
 	/**
 	 * Metodo que carga el archivo CSV de datos por hora
 	 */
@@ -165,44 +164,116 @@ public class MVCModelo {
 			if(!primeraLectura)
 			{
 				Double[] dato = {Double.parseDouble(line[0]), Double.parseDouble(line[1]), Double.parseDouble(line[2]), Double.parseDouble(line[3]), Double.parseDouble(line[4]), Double.parseDouble(line[5]), Double.parseDouble(line[6])}; 
-				
+
 				queueHourly.enqueue(dato);
 			}
 			primeraLectura = false;
 		}
 		reader.close();
 	}
-	
-	public int zonaConMenorIdentificador()
+
+	/**
+	 * Recorre todos los datos cargados y devuelve un arreglo de dos posiciones con las zonas con menor y mayor identificador respectivamente
+	 * @return un arreglo de tamaño 2 con las zonas con menor y mayor identificador
+	 */
+	public Double[] zonaConMenorYMayorIdentificador()
 	{
-		int respuesta = -1;
+		Double[] respuesta = new Double[2];
 		
+		double menorIdentificador = -1;
+		double mayorIdentificador = -1;		
 		
+		Node actual = queueMonthly.darPrimerNodo();
+
+		while(actual.darSiguente() != null)
+		{
+			Double[] datos = (Double[]) actual.darDato();
+
+			if(menorIdentificador < 0 || datos[0] < menorIdentificador)
+			{
+				menorIdentificador = datos[0];
+			}			
+			if(menorIdentificador < 0 || datos[1] < menorIdentificador)
+			{
+				menorIdentificador = datos[1];
+			}
+
+			if(mayorIdentificador < 0 || datos[0] > mayorIdentificador)
+			{
+				mayorIdentificador = datos[0];
+			}			
+			if(mayorIdentificador < 0 || datos[1] > mayorIdentificador)
+			{
+				mayorIdentificador = datos[1];
+			}		
+			
+			actual = actual.darSiguente();			
+		}
+
+		actual = stackWeekly.darNodoSuperior();
+
+		while(actual.darSiguente() != null)
+		{
+			Double[] datos = (Double[]) actual.darDato();
+
+			if(menorIdentificador < 0 || datos[0] < menorIdentificador)
+			{
+				menorIdentificador = datos[0];
+			}			
+			if(menorIdentificador < 0 || datos[1] < menorIdentificador)
+			{
+				menorIdentificador = datos[1];
+			}
+
+			if(mayorIdentificador < 0 || datos[0] > mayorIdentificador)
+			{
+				mayorIdentificador = datos[0];
+			}			
+			if(mayorIdentificador < 0 || datos[1] > mayorIdentificador)
+			{
+				mayorIdentificador = datos[1];
+			}		
+			
+			actual = actual.darSiguente();			
+		}
+
+		actual = queueHourly.darPrimerNodo();
+
+		while(actual.darSiguente() != null)
+		{
+			Double[] datos = (Double[]) actual.darDato();
+
+			if(menorIdentificador < 0 || datos[0] < menorIdentificador)
+			{
+				menorIdentificador = datos[0];
+			}			
+			if(menorIdentificador < 0 || datos[1] < menorIdentificador)
+			{
+				menorIdentificador = datos[1];
+			}
+
+			if(mayorIdentificador < 0 || datos[0] > mayorIdentificador)
+			{
+				mayorIdentificador = datos[0];
+			}			
+			if(mayorIdentificador < 0 || datos[1] > mayorIdentificador)
+			{
+				mayorIdentificador = datos[1];
+			}		
+			
+			actual = actual.darSiguente();			
+		}
 		
-		
-		
-		
-		
-		
-		
-		
+		respuesta[0] = menorIdentificador;
+		respuesta[1] = mayorIdentificador;
+ 
+		return respuesta;
 	}
-	
-	public int zonaConMayorIdentificador()
-	{
-		int respuesta = -1;
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	}	
-	//Metodos proyecto
+
+	// -------------------------------------------------------------
+	// Métodos de los requerimientos
+	// -------------------------------------------------------------
+
 	public double consultarTiempoPromedioMes(String pzona, int pmes)
 	{
 		return 0;
@@ -233,8 +304,6 @@ public class MVCModelo {
 	}
 	public void generarTabla(String zonaA, String zonaB)
 	{
-		
-	}
 
-	
+	}
 }

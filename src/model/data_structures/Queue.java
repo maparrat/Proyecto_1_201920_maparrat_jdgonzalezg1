@@ -57,13 +57,13 @@ public class Queue <T> implements IQueue <T>
 		return numeroElementos;
 	}
 	
-	public T darPrimerDato()
+	public Node darPrimerNodo()
 	{
-		return (T) front.darDato();
+		return front;
 	}
 	
-	public T darUltimoDato()
+	public Node darUltimoNodo()
 	{
-		return (T) back.darDato();
+		return back;
 	}
 }

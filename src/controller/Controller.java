@@ -57,7 +57,7 @@ public class Controller {
 					}
 					catch(InputMismatchException e)
 					{
-						System.out.println("Debe ingresar un valor numérico (1 o 2)\n---------");
+						option = 0;
 						break;
 					}
 
@@ -75,8 +75,10 @@ public class Controller {
 							System.out.println("Total de viajes en el archivo de semanas: " + modelo.darTamanoWeekly());
 							System.out.println("Total de viajes en el archivo de horas: " + modelo.darTamanoHourly());
 
-							System.out.println("La zona con menor identificador en todos los archivos del trimestre es: " + modelo.zonaConMenorIdentificador());
-							System.out.println("La zona con mayor identificador en todos los archivos del trimestre es: " + modelo.zonaConMayorIdentificador() + "\n---------");
+							Double[] zonas = modelo.zonaConMenorYMayorIdentificador();
+							
+							System.out.println("La zona con menor identificador en todos los archivos del trimestre es: " + zonas[0]);
+							System.out.println("La zona con mayor identificador en todos los archivos del trimestre es: " + zonas[1] + "\n---------");
 						}
 						catch (Exception e)
 						{
@@ -89,7 +91,7 @@ public class Controller {
 					}
 					break;
 					
-				case 11: 
+				case 2: 
 					System.out.println("--------- \n Hasta pronto !! \n---------"); 
 					lector.close();
 					fin = true;
@@ -100,6 +102,5 @@ public class Controller {
 					break;
 			}
 		}
-		
 	}	
 }
