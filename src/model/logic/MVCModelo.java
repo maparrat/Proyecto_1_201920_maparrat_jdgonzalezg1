@@ -82,7 +82,7 @@ public class MVCModelo {
 	 */
 	public Node darNodoSuperiorWeekly()
 	{
-		return queueMonthly.darPrimerNodo();
+		return stackWeekly.darNodoSuperior();
 	}	
 
 	/**
@@ -100,7 +100,7 @@ public class MVCModelo {
 	 */
 	public Node darUltimoNodoHourly()
 	{
-		return queueHourly.darPrimerNodo();
+		return queueHourly.darUltimoNodo();
 	}
 
 	// -------------------------------------------------------------
@@ -136,7 +136,7 @@ public class MVCModelo {
 	{
 		boolean primeraLectura = true;
 
-		CSVReader reader = new CSVReader(new FileReader("./data/bogota-cadastral-2018-" + trimestre + "-All-WeeklyAggregate.csv"));
+		CSVReader reader = new CSVReader(new FileReader("./data/bogota-cadastral-2018-" + trimestre + "-WeeklyAggregate.csv"));
 
 		for(String[] line: reader)
 		{

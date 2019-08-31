@@ -15,7 +15,7 @@ public class Stack<T> implements IStack<T>
 		if(top == null)
 		{
 			top = new Node();
-			top.asignarDato(item);			
+			top.asignarDato(item);		
 		}
 		else
 		{
@@ -29,12 +29,19 @@ public class Stack<T> implements IStack<T>
 
 	public T pop() 
 	{
-		T respuesta = (T) top.darDato();
+		if(top != null)
+		{
+			T respuesta = (T) top.darDato();
 
-		top = top.darSiguente();
-		numeroElementos --;
+			top = top.darSiguente();
+			numeroElementos --;
 
-		return respuesta;
+			return respuesta;
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	public int darNumeroElementos()

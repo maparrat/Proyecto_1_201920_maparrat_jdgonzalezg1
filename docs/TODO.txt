@@ -1,6 +1,7 @@
+1)Puse complejidad O(N) o O(1) pero toca preguntar
 
+2)Nuevo UML con la estructura de datos
 
-1)Puse complejidad O(N) o O(1) pero toca prguntar
+3)Nuevo UML completo
 
-3) Mostrar el reporte
-de los resultados descritos en la sección Carga de Información.
+4)Pruebas unitarias
