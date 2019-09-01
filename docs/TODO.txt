@@ -1,5 +1,2 @@
 1)Puse complejidad O(N) o O(1) pero toca preguntar
 
-2)Nuevo UML con la estructura de datos
-
-3)Nuevo UML completo
