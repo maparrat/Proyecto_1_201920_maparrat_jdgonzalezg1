@@ -1,2 +1,0 @@
-1)Puse complejidad O(N) o O(1) pero toca preguntar
-
