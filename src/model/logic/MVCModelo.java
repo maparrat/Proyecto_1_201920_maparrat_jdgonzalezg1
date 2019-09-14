@@ -283,17 +283,17 @@ public class MVCModelo {
 		while(actual != null)
 		{
 			double[] datosActual = (double[]) actual.darDato();
-			
+
 			if(datosActual[0] == pZonaOrigen && datosActual[1] == pZonaDestino && datosActual[2] == pMes)
 			{
 				viajes.enqueue(datosActual);
 			}
-			
+
 			actual = actual.darSiguente();
 		}
-			return viajes;		
+		return viajes;		
 	}
-	
+
 	public Queue mejoresPromediosMes(int  n, int mes )
 	{
 		return null; 
@@ -311,29 +311,52 @@ public class MVCModelo {
 		while(actual != null)
 		{
 			double[] datosActual = (double[]) actual.darDato();
-			
+
 			if(datosActual[0] == pZonaOrigen && datosActual[1] == pZonaDestino && datosActual[2] == pDia)
 			{
 				viajes.push(datosActual);
 			}
-			
+
 			actual = actual.darSiguente();
 		}
-			return viajes;	
+		return viajes;	
 	}
-	
+
 	public Queue mejoresPromediosDia(int  n, int pdia )
 	{
 		return null; 
 	}
+
 	public String compararTiemposPromedioDia(int dia, String zonaMenor, String zonaMayor, String zonaX)
 	{
 		return null; 
 	}
-	public Queue viejesHoras(int horaInicio, int horaFin)
+
+	public Queue consultarTiempoPromedioYDesviacionEstandarFranjaHoraria(int pZonaOrigen, int pZonaDestino, int horaInicio, int horaFin)
+	{
+		Queue viajes = new Queue();
+
+		Node actual = queueHourly.darPrimerNodo();
+
+		while(actual != null)
+		{
+			double[] datosActual = (double[]) actual.darDato();
+
+			if(datosActual[0] == pZonaOrigen && datosActual[1] == pZonaDestino && datosActual[2] >= horaInicio && datosActual[2] <= horaFin)
+			{
+				viajes.enqueue(datosActual);
+			}
+
+			actual = actual.darSiguente();
+		}
+		return viajes;		
+	}
+
+	public Queue mejoresPromediosHora(int horaInicio, int horaFin)
 	{
 		return null;
 	}
+
 	public void generarTabla(String zonaA, String zonaB)
 	{
 

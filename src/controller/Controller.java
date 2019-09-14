@@ -109,6 +109,12 @@ public class Controller {
 
 					System.out.println("--------- \nDar numero del mes: ");
 					mes1A = lector.nextInt();
+					
+					if(mes1A < 1 || mes1A > 12)
+					{
+						System.out.println("Debe ingresar un valor válido (entre 1 y 12).\n---------");
+						break;
+					}
 				}
 				catch(InputMismatchException e)
 				{
@@ -162,8 +168,14 @@ public class Controller {
 					System.out.println("--------- \nDar Id zona de destino: ");
 					zonaDestino1B = lector.nextInt();
 
-					System.out.println("--------- \nDar numero del mes: ");
+					System.out.println("--------- \nDar numero del día de la semana: ");
 					dia1B = lector.nextInt();
+					
+					if(dia1B < 1 || dia1B > 7)
+					{
+						System.out.println("Debe ingresar un valor válido (entre 1 y 7).\n---------");
+						break;
+					}
 				}
 				catch(InputMismatchException e)
 				{
@@ -206,6 +218,68 @@ public class Controller {
 
 			case 8:
 				//(1C)
+				int zonaOrigen1C;
+				int zonaDestino1C;
+				int horaInicial1C;
+				int horaFinal1C;
+				try
+				{
+					System.out.println("--------- \nDar Id zona de origen: ");
+					zonaOrigen1C = lector.nextInt();					
+
+					System.out.println("--------- \nDar Id zona de destino: ");
+					zonaDestino1C = lector.nextInt();
+
+					System.out.println("--------- \nDar numero del mes: ");
+					horaInicial1C = lector.nextInt();
+					
+					if(horaInicial1C < 0 || horaInicial1C > 23)
+					{
+						System.out.println("Debe ingresar un valor válido (entre 0 y 23).\n---------");
+						break;
+					}
+					
+					System.out.println("--------- \nDar numero del mes: ");
+					horaFinal1C = lector.nextInt();
+					
+					if(horaFinal1C < 0 || horaFinal1C > 23)
+					{
+						System.out.println("Debe ingresar un valor válido (entre 0 y 23).\n---------");
+						break;
+					}
+				}
+				catch(InputMismatchException e)
+				{
+					option = 0;
+					break;
+				}
+
+				Queue<double[]> respuesta1C = modelo.consultarTiempoPromedioYDesviacionEstandarFranjaHoraria(zonaOrigen1C, zonaDestino1C, horaInicial1C, horaFinal1C);
+
+				if(respuesta1C.darNumeroElementos() == 0)
+				{
+					System.out.println("No hay viajes registrados con la información dada.\n---------");
+					break;
+				}
+				else
+				{
+					int i = 1;
+							
+					System.out.println("---------\nTotal de viajes: " + respuesta1C.darNumeroElementos() + "\n---------");
+							
+					while(respuesta1C.darNumeroElementos() > 0)
+					{
+						double[] datosActual = respuesta1C.dequeue();
+						
+						System.out.println("Datos del viaje " + i + ":");
+						System.out.println("Tiempo promedio de viaje: " + datosActual[3]);
+						System.out.println("Desviación estandar: " + datosActual[4] + "\n---------");
+						
+						i++;
+					}
+				}
+				
+				break;
 
 			case 9:
 				//(2C)
