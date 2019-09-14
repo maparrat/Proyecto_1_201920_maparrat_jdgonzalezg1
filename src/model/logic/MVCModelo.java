@@ -120,7 +120,7 @@ public class MVCModelo {
 		{
 			if(!primeraLectura)
 			{
-				Double[] dato = {Double.parseDouble(line[0]), Double.parseDouble(line[1]), Double.parseDouble(line[2]), Double.parseDouble(line[3]), Double.parseDouble(line[4]), Double.parseDouble(line[5]), Double.parseDouble(line[6])}; 
+				double[] dato = {Double.parseDouble(line[0]), Double.parseDouble(line[1]), Double.parseDouble(line[2]), Double.parseDouble(line[3]), Double.parseDouble(line[4]), Double.parseDouble(line[5]), Double.parseDouble(line[6])}; 
 
 				queueMonthly.enqueue(dato);
 			}
@@ -142,7 +142,7 @@ public class MVCModelo {
 		{
 			if(!primeraLectura)
 			{
-				Double[] dato = {Double.parseDouble(line[0]), Double.parseDouble(line[1]), Double.parseDouble(line[2]), Double.parseDouble(line[3]), Double.parseDouble(line[4]), Double.parseDouble(line[5]), Double.parseDouble(line[6])}; 
+				double[] dato = {Double.parseDouble(line[0]), Double.parseDouble(line[1]), Double.parseDouble(line[2]), Double.parseDouble(line[3]), Double.parseDouble(line[4]), Double.parseDouble(line[5]), Double.parseDouble(line[6])}; 
 				stackWeekly.push(dato);
 			}
 			primeraLectura = false;
@@ -163,7 +163,7 @@ public class MVCModelo {
 		{
 			if(!primeraLectura)
 			{
-				Double[] dato = {Double.parseDouble(line[0]), Double.parseDouble(line[1]), Double.parseDouble(line[2]), Double.parseDouble(line[3]), Double.parseDouble(line[4]), Double.parseDouble(line[5]), Double.parseDouble(line[6])}; 
+				double[] dato = {Double.parseDouble(line[0]), Double.parseDouble(line[1]), Double.parseDouble(line[2]), Double.parseDouble(line[3]), Double.parseDouble(line[4]), Double.parseDouble(line[5]), Double.parseDouble(line[6])}; 
 
 				queueHourly.enqueue(dato);
 			}
@@ -176,9 +176,9 @@ public class MVCModelo {
 	 * Recorre todos los datos cargados y devuelve un arreglo de dos posiciones con las zonas con menor y mayor identificador respectivamente
 	 * @return un arreglo de tamaño 2 con las zonas con menor y mayor identificador
 	 */
-	public Double[] zonaConMenorYMayorIdentificador()
+	public double[] zonaConMenorYMayorIdentificador()
 	{
-		Double[] respuesta = new Double[2];
+		double[] respuesta = new double[2];
 
 		double menorIdentificador = -1;
 		double mayorIdentificador = -1;		
@@ -187,7 +187,7 @@ public class MVCModelo {
 
 		while(actual.darSiguente() != null)
 		{
-			Double[] datos = (Double[]) actual.darDato();
+			double[] datos = (double[]) actual.darDato();
 
 			if(menorIdentificador < 0 || datos[0] < menorIdentificador)
 			{
@@ -214,7 +214,7 @@ public class MVCModelo {
 
 		while(actual.darSiguente() != null)
 		{
-			Double[] datos = (Double[]) actual.darDato();
+			double[] datos = (double[]) actual.darDato();
 
 			if(menorIdentificador < 0 || datos[0] < menorIdentificador)
 			{
@@ -241,7 +241,7 @@ public class MVCModelo {
 
 		while(actual.darSiguente() != null)
 		{
-			Double[] datos = (Double[]) actual.darDato();
+			double[] datos = (double[]) actual.darDato();
 
 			if(menorIdentificador < 0 || datos[0] < menorIdentificador)
 			{
@@ -293,6 +293,7 @@ public class MVCModelo {
 		}
 			return viajes;		
 	}
+	
 	public Queue mejoresPromediosMes(int  n, int mes )
 	{
 		return null; 
@@ -301,10 +302,26 @@ public class MVCModelo {
 	{
 		return null; 
 	}
-	public double consultarTiempoPromedioDia(String pzona, int pdia)
+	public Stack consultarTiempoPromedioYDesviacionEstandarDia(int pZonaOrigen, int pZonaDestino, int pDia)
 	{
-		return 0;
+		Stack viajes = new Stack();
+
+		Node actual = stackWeekly.darNodoSuperior();
+
+		while(actual != null)
+		{
+			double[] datosActual = (double[]) actual.darDato();
+			
+			if(datosActual[0] == pZonaOrigen && datosActual[1] == pZonaDestino && datosActual[2] == pDia)
+			{
+				viajes.push(datosActual);
+			}
+			
+			actual = actual.darSiguente();
+		}
+			return viajes;	
 	}
+	
 	public Queue mejoresPromediosDia(int  n, int pdia )
 	{
 		return null; 

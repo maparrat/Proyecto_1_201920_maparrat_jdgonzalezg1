@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import model.data_structures.Node;
 import model.data_structures.Queue;
+import model.data_structures.Stack;
 import model.logic.MVCModelo;
 import view.MVCView;
 
@@ -69,7 +70,7 @@ public class Controller {
 					{
 						modelo.cargarArchivoCSVMonthly(numeroTrimestre);
 						modelo.cargarArchivoCSVWeekly(numeroTrimestre);
-						modelo.cargarArchivoCSVHourly(numeroTrimestre);
+						//modelo.cargarArchivoCSVHourly(numeroTrimestre);
 
 						System.out.println("Archivo cargado");
 
@@ -77,14 +78,14 @@ public class Controller {
 						System.out.println("Total de viajes en el archivo de semanas: " + modelo.darTamanoWeekly());
 						System.out.println("Total de viajes en el archivo de horas: " + modelo.darTamanoHourly());
 
-						Double[] zonas = modelo.zonaConMenorYMayorIdentificador();
+						double[] zonas = modelo.zonaConMenorYMayorIdentificador();
 
 						System.out.println("La zona con menor identificador en todos los archivos del trimestre es: " + zonas[0]);
 						System.out.println("La zona con mayor identificador en todos los archivos del trimestre es: " + zonas[1] + "\n---------");
 					}
 					catch (Exception e)
 					{
-						System.out.println("Se ha producido un error al cargar el archivo\n---------");
+						System.out.println("Se ha producido un error al cargar los archivos\n---------");
 					}
 				}
 				else
@@ -101,31 +102,13 @@ public class Controller {
 				try
 				{
 					System.out.println("--------- \nDar Id zona de origen: ");
-					zonaOrigen1A = lector.nextInt();
-
-					if(zonaOrigen1A < 0)
-					{
-						System.out.println("Debe ingresar un valor válido.\n---------");
-						break;
-					}						
+					zonaOrigen1A = lector.nextInt();					
 
 					System.out.println("--------- \nDar Id zona de destino: ");
 					zonaDestino1A = lector.nextInt();
 
-					if(zonaDestino1A < 0)
-					{
-						System.out.println("Debe ingresar un valor válido.\n---------");
-						break;
-					}
-
 					System.out.println("--------- \nDar numero del mes: ");
 					mes1A = lector.nextInt();
-
-					if(mes1A < 1 || mes1A > 12)
-					{
-						System.out.println("Debe ingresar un valor válido.\n---------");
-						break;
-					}
 				}
 				catch(InputMismatchException e)
 				{
@@ -133,31 +116,32 @@ public class Controller {
 					break;
 				}
 
-				Queue<Node> respuesta = modelo.consultarTiempoPromedioYDesviacionEstandarMes(zonaOrigen1A, zonaDestino1A, mes1A);
+				Queue<double[]> respuesta1A = modelo.consultarTiempoPromedioYDesviacionEstandarMes(zonaOrigen1A, zonaDestino1A, mes1A);
 
-				if(respuesta.darNumeroElementos() == 0)
+				if(respuesta1A.darNumeroElementos() == 0)
 				{
 					System.out.println("No hay viajes registrados con la información dada.\n---------");
 					break;
 				}
 				else
 				{
-					Node actual = respuesta.darPrimerNodo();
 					int i = 1;
-					while(actual != null)
+							
+					System.out.println("---------\nTotal de viajes: " + respuesta1A.darNumeroElementos() + "\n---------");
+							
+					while(respuesta1A.darNumeroElementos() > 0)
 					{
-						double[] datosActual = (double[]) actual.darDato();
-						System.out.println("Datos del viaje " + i + ":");
-						System.out.println("Tiempo promedio de viaje: " + datosActual[0]);
-						System.out.println("Desviación estandar: " + datosActual[1] + "\n---------");
+						double[] datosActual = respuesta1A.dequeue();
 						
-						actual = actual.darSiguente();
+						System.out.println("Datos del viaje " + i + ":");
+						System.out.println("Tiempo promedio de viaje: " + datosActual[3]);
+						System.out.println("Desviación estandar: " + datosActual[4] + "\n---------");
+						
 						i++;
 					}
-					
-					System.out.println("Total de viajes: " + i);
-
 				}
+				
+				break;
 
 			case 3: 
 				//(2A)
@@ -167,6 +151,52 @@ public class Controller {
 
 			case 5:
 				//(1B)
+				int zonaOrigen1B;
+				int zonaDestino1B;
+				int dia1B;
+				try
+				{
+					System.out.println("--------- \nDar Id zona de origen: ");
+					zonaOrigen1B = lector.nextInt();					
+
+					System.out.println("--------- \nDar Id zona de destino: ");
+					zonaDestino1B = lector.nextInt();
+
+					System.out.println("--------- \nDar numero del mes: ");
+					dia1B = lector.nextInt();
+				}
+				catch(InputMismatchException e)
+				{
+					option = 0;
+					break;
+				}
+
+				Stack<double[]> respuesta1B = modelo.consultarTiempoPromedioYDesviacionEstandarDia(zonaOrigen1B, zonaDestino1B, dia1B);
+
+				if(respuesta1B.darNumeroElementos() == 0)
+				{
+					System.out.println("No hay viajes registrados con la información dada.\n---------");
+					break;
+				}
+				else
+				{
+					int i = 1;
+							
+					System.out.println("---------\nTotal de viajes: " + respuesta1B.darNumeroElementos() + "\n---------");
+							
+					while(respuesta1B.darNumeroElementos() > 0)
+					{
+						double[] datosActual = respuesta1B.pop();
+						
+						System.out.println("Datos del viaje " + i + ":");
+						System.out.println("Tiempo promedio de viaje: " + datosActual[3]);
+						System.out.println("Desviación estandar: " + datosActual[4] + "\n---------");
+						
+						i++;
+					}
+				}
+				
+				break;
 
 			case 6:
 				//(2B)

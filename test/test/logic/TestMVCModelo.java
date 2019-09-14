@@ -134,11 +134,11 @@ public class TestMVCModelo
 		setUp3();
 		setUp4();
 		
-		Double[] respuesta = modelo.zonaConMenorYMayorIdentificador();
+		double[] respuesta = modelo.zonaConMenorYMayorIdentificador();
 		
 		System.out.println(respuesta[0] + " - " + respuesta[1]);
 		
-		assertTrue(respuesta[0] != null);
-		assertTrue(respuesta[1] != null);		
+		assertTrue(respuesta[0] != -1);
+		assertTrue(respuesta[1] != -1);		
 	}
 }
