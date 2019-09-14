@@ -179,10 +179,10 @@ public class MVCModelo {
 	public Double[] zonaConMenorYMayorIdentificador()
 	{
 		Double[] respuesta = new Double[2];
-		
+
 		double menorIdentificador = -1;
 		double mayorIdentificador = -1;		
-		
+
 		Node actual = queueMonthly.darPrimerNodo();
 
 		while(actual.darSiguente() != null)
@@ -206,7 +206,7 @@ public class MVCModelo {
 			{
 				mayorIdentificador = datos[1];
 			}		
-			
+
 			actual = actual.darSiguente();			
 		}
 
@@ -233,7 +233,7 @@ public class MVCModelo {
 			{
 				mayorIdentificador = datos[1];
 			}		
-			
+
 			actual = actual.darSiguente();			
 		}
 
@@ -260,13 +260,13 @@ public class MVCModelo {
 			{
 				mayorIdentificador = datos[1];
 			}		
-			
+
 			actual = actual.darSiguente();			
 		}
-		
+
 		respuesta[0] = menorIdentificador;
 		respuesta[1] = mayorIdentificador;
- 
+
 		return respuesta;
 	}
 
@@ -274,9 +274,24 @@ public class MVCModelo {
 	// Métodos de los requerimientos
 	// -------------------------------------------------------------
 
-	public double consultarTiempoPromedioMes(String pzona, int pmes)
+	public Queue consultarTiempoPromedioYDesviacionEstandarMes(int pZonaOrigen, int pZonaDestino, int pMes)
 	{
-		return 0;
+		Queue viajes = new Queue();
+
+		Node actual = queueMonthly.darPrimerNodo();
+
+		while(actual != null)
+		{
+			double[] datosActual = (double[]) actual.darDato();
+			
+			if(datosActual[0] == pZonaOrigen && datosActual[1] == pZonaDestino && datosActual[2] == pMes)
+			{
+				viajes.enqueue(datosActual);
+			}
+			
+			actual = actual.darSiguente();
+		}
+			return viajes;		
 	}
 	public Queue mejoresPromediosMes(int  n, int mes )
 	{
