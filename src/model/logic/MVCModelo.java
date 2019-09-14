@@ -278,9 +278,17 @@ public class MVCModelo {
 	{
 		return 0;
 	}
-	public Queue mejoresPromediosMes(int  n, int mes )
+
+	/** 
+	 * Algoritmo tomado de Algorithms 4th edition by Robert Sedgewick and Kevin Wayne (2011)
+	 * Consultado el 06/09/19
+	 * Disponible en http://www.albertstam.com/Algorithms.pdf
+	 */
+	public Queue mejoresPromediosMes(int  TamañoArreglo, int mes )
 	{
-		return null; 
+		Queue Respuesta = null;
+	    
+		return Respuesta;
 	}
 	public String compararTiemposPromedioMes(int mes, String zonaMenor, String zonaMayor, String zonaX)
 	{
@@ -291,6 +299,10 @@ public class MVCModelo {
 		return 0;
 	}
 	public Queue mejoresPromediosDia(int  n, int pdia )
+	{
+		return null; 
+	}
+	public Queue mejoresPromedioshora(int  n, int hora )
 	{
 		return null; 
 	}
