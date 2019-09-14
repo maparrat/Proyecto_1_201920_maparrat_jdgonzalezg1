@@ -109,7 +109,7 @@ public class Controller {
 
 					System.out.println("--------- \nDar numero del mes: ");
 					mes1A = lector.nextInt();
-					
+
 					if(mes1A < 1 || mes1A > 12)
 					{
 						System.out.println("Debe ingresar un valor válido (entre 1 y 12).\n---------");
@@ -132,21 +132,21 @@ public class Controller {
 				else
 				{
 					int i = 1;
-							
+
 					System.out.println("---------\nTotal de viajes: " + respuesta1A.darNumeroElementos() + "\n---------");
-							
+
 					while(respuesta1A.darNumeroElementos() > 0)
 					{
 						double[] datosActual = respuesta1A.dequeue();
-						
+
 						System.out.println("Datos del viaje " + i + ":");
 						System.out.println("Tiempo promedio de viaje: " + datosActual[3]);
 						System.out.println("Desviación estandar: " + datosActual[4] + "\n---------");
-						
+
 						i++;
 					}
 				}
-				
+
 				break;
 
 			case 3: 
@@ -154,6 +154,58 @@ public class Controller {
 
 			case 4:
 				//(3A)
+
+				int zona3A;
+				int zonaMenor3A;
+				int zonaMayor3A;
+				int mes3A;
+				try
+				{
+					System.out.println("--------- \nDar Id zona a comparar: ");
+					zona3A = lector.nextInt();					
+
+					System.out.println("--------- \nDar Id zona menor del rango X: ");
+					zonaMenor3A = lector.nextInt();
+
+					System.out.println("--------- \nDar Id zona mayor del rango X: ");
+					zonaMayor3A = lector.nextInt();
+
+					System.out.println("--------- \nDar numero del mes: ");
+					mes3A = lector.nextInt();
+
+					if(mes3A < 1 || mes3A > 12)
+					{
+						System.out.println("Debe ingresar un valor válido (entre 1 y 12).\n---------");
+						break;
+					}
+				}
+				catch(InputMismatchException e)
+				{
+					option = 0;
+					break;
+				}
+
+				Queue<double[]> viajesX3A = modelo.darViajesOrdenadosEnUnRangoDeZonasMes(zona3A, zonaMenor3A, zonaMayor3A, mes3A);
+				
+				if(viajesX3A.darNumeroElementos() == 0)
+				{
+					System.out.println("No hay viajes registrados en el rango de zonas dado.\n---------");
+					break;
+				}
+				else
+				{
+					String[] mensajes = modelo.generarMensajesComparacion(zona3A, viajesX3A);
+
+					for (int i = 0; i < mensajes.length; i++)
+					{
+						if(i == 0 || !mensajes[i].equals(mensajes[i-1]))
+							System.out.println(mensajes[i]);
+					}
+				}
+
+				System.out.println("---------");
+
+				break;
 
 			case 5:
 				//(1B)
@@ -170,7 +222,7 @@ public class Controller {
 
 					System.out.println("--------- \nDar numero del día de la semana: ");
 					dia1B = lector.nextInt();
-					
+
 					if(dia1B < 1 || dia1B > 7)
 					{
 						System.out.println("Debe ingresar un valor válido (entre 1 y 7).\n---------");
@@ -193,21 +245,21 @@ public class Controller {
 				else
 				{
 					int i = 1;
-							
+
 					System.out.println("---------\nTotal de viajes: " + respuesta1B.darNumeroElementos() + "\n---------");
-							
+
 					while(respuesta1B.darNumeroElementos() > 0)
 					{
 						double[] datosActual = respuesta1B.pop();
-						
+
 						System.out.println("Datos del viaje " + i + ":");
 						System.out.println("Tiempo promedio de viaje: " + datosActual[3]);
 						System.out.println("Desviación estandar: " + datosActual[4] + "\n---------");
-						
+
 						i++;
 					}
 				}
-				
+
 				break;
 
 			case 6:
@@ -215,6 +267,58 @@ public class Controller {
 
 			case 7:
 				//(3B)
+
+				int zona3B;
+				int zonaMenor3B;
+				int zonaMayor3B;
+				int dia3B;
+				try
+				{
+					System.out.println("--------- \nDar Id zona a comparar: ");
+					zona3B = lector.nextInt();					
+
+					System.out.println("--------- \nDar Id zona menor del rango X: ");
+					zonaMenor3B = lector.nextInt();
+
+					System.out.println("--------- \nDar Id zona mayor del rango X: ");
+					zonaMayor3B = lector.nextInt();
+
+					System.out.println("--------- \nDar numero del día de la semana: ");
+					dia3B = lector.nextInt();
+
+					if(dia3B < 1 || dia3B > 7)
+					{
+						System.out.println("Debe ingresar un valor válido (entre 1 y 7).\n---------");
+						break;
+					}
+				}
+				catch(InputMismatchException e)
+				{
+					option = 0;
+					break;
+				}
+
+				Queue<double[]> viajesX3B = modelo.darViajesOrdenadosEnUnRangoDeZonasDia(zona3B, zonaMenor3B, zonaMayor3B, dia3B);
+
+				if(viajesX3B.darNumeroElementos() == 0)
+				{
+					System.out.println("No hay viajes registrados en el rango de zonas dado.\n---------");
+					break;
+				}
+				else
+				{
+					String[] mensajes = modelo.generarMensajesComparacion(zona3B, viajesX3B);
+
+					for (int i = 0; i < mensajes.length; i++)
+					{
+						if(i == 0 || !mensajes[i].equals(mensajes[i-1]))
+							System.out.println(mensajes[i]);
+					}
+				}
+
+				System.out.println("---------");
+
+				break;
 
 			case 8:
 				//(1C)
@@ -232,16 +336,16 @@ public class Controller {
 
 					System.out.println("--------- \nDar numero del mes: ");
 					horaInicial1C = lector.nextInt();
-					
+
 					if(horaInicial1C < 0 || horaInicial1C > 23)
 					{
 						System.out.println("Debe ingresar un valor válido (entre 0 y 23).\n---------");
 						break;
 					}
-					
+
 					System.out.println("--------- \nDar numero del mes: ");
 					horaFinal1C = lector.nextInt();
-					
+
 					if(horaFinal1C < 0 || horaFinal1C > 23)
 					{
 						System.out.println("Debe ingresar un valor válido (entre 0 y 23).\n---------");
@@ -264,21 +368,21 @@ public class Controller {
 				else
 				{
 					int i = 1;
-							
+
 					System.out.println("---------\nTotal de viajes: " + respuesta1C.darNumeroElementos() + "\n---------");
-							
+
 					while(respuesta1C.darNumeroElementos() > 0)
 					{
 						double[] datosActual = respuesta1C.dequeue();
-						
+
 						System.out.println("Datos del viaje " + i + ":");
 						System.out.println("Tiempo promedio de viaje: " + datosActual[3]);
 						System.out.println("Desviación estandar: " + datosActual[4] + "\n---------");
-						
+
 						i++;
 					}
 				}
-				
+
 				break;
 
 			case 9:
