@@ -274,6 +274,7 @@ public class MVCModelo {
 	// Métodos de los requerimientos
 	// -------------------------------------------------------------
 
+	//(1A)
 	public Queue consultarTiempoPromedioYDesviacionEstandarMes(int pZonaOrigen, int pZonaDestino, int pMes)
 	{
 		Queue viajes = new Queue();
@@ -294,11 +295,13 @@ public class MVCModelo {
 		return viajes;
 	}
 
+	//(2A)
 	public Queue mejoresPromediosMes(int N, int mes)
 	{
 		return null; 
 	}
 
+	//(3A)
 	public Queue darViajesOrdenadosEnUnRangoDeZonasMes(int zona, int pZonaMenor, int pZonaMayor, int pMes)
 	{
 		Queue viajes = new Queue();
@@ -309,9 +312,13 @@ public class MVCModelo {
 		{
 			double[] datosActual = (double[]) actual.darDato();
 
-			if(datosActual[2] == pMes && (datosActual[0] == zona || datosActual[1] == zona))
+			if(datosActual[2] == pMes)
 			{
-				if((datosActual[0] >= pZonaMenor && datosActual [0] <= pZonaMayor) || (datosActual[1] >= pZonaMenor && datosActual [1] <= pZonaMayor))
+				if(datosActual[0] == zona && (datosActual[1] >= pZonaMenor && datosActual [1] <= pZonaMayor))
+				{
+					viajes.enqueue(datosActual);
+				}
+				else if(datosActual[1] == zona && (datosActual[0] >= pZonaMenor && datosActual [0] <= pZonaMayor))
 				{
 					viajes.enqueue(datosActual);
 				}
@@ -328,6 +335,7 @@ public class MVCModelo {
 			viajes.dequeue();
 		}
 
+		//Ordenamiento por inserción
 		for (int i = 0; i < temp.length; i++)
 		{
 			boolean enPos = false;
@@ -360,6 +368,7 @@ public class MVCModelo {
 		return viajes;		 
 	}
 
+	//(1B)
 	public Stack consultarTiempoPromedioYDesviacionEstandarDia(int pZonaOrigen, int pZonaDestino, int pDia)
 	{
 		Stack viajes = new Stack();
@@ -380,11 +389,13 @@ public class MVCModelo {
 		return viajes;
 	}
 
+	//(2B)
 	public Stack mejoresPromediosDia(int  n, int pdia )
 	{
 		return null; 
 	}
 
+	//(3B)
 	public Queue darViajesOrdenadosEnUnRangoDeZonasDia(int zona, int pZonaMenor, int pZonaMayor, int pDia)
 	{
 		Queue viajes = new Queue();
@@ -395,9 +406,13 @@ public class MVCModelo {
 		{
 			double[] datosActual = (double[]) actual.darDato();
 
-			if(datosActual[2] == pDia && (datosActual[0] == zona || datosActual[1] == zona))
+			if(datosActual[2] == pDia)
 			{
-				if((datosActual[0] >= pZonaMenor && datosActual [0] <= pZonaMayor) || (datosActual[1] >= pZonaMenor && datosActual [1] <= pZonaMayor))
+				if(datosActual[0] == zona && (datosActual[1] >= pZonaMenor && datosActual [1] <= pZonaMayor))
+				{
+					viajes.enqueue(datosActual);
+				}
+				else if(datosActual[1] == zona && (datosActual[0] >= pZonaMenor && datosActual [0] <= pZonaMayor))
 				{
 					viajes.enqueue(datosActual);
 				}
@@ -414,6 +429,7 @@ public class MVCModelo {
 			viajes.dequeue();
 		}
 
+		//Ordenamiento por inserción
 		for (int i = 0; i < temp.length; i++)
 		{
 			boolean enPos = false;
@@ -446,6 +462,7 @@ public class MVCModelo {
 		return viajes;	
 	}
 
+	//(1C)
 	public Queue consultarTiempoPromedioYDesviacionEstandarFranjaHoraria(int pZonaOrigen, int pZonaDestino, int horaInicio, int horaFin)
 	{
 		Queue viajes = new Queue();
@@ -466,11 +483,13 @@ public class MVCModelo {
 		return viajes;		
 	}
 
+	//(2C)
 	public Queue mejoresPromediosHora(int horaInicio, int horaFin)
 	{
 		return null;
 	}
 
+	//(3C)
 	public void generarTabla(String zonaA, String zonaB)
 	{
 
@@ -493,7 +512,6 @@ public class MVCModelo {
 			double tiempoPromedio1 = buscarTiempoPromedioDeViajeEntreZonas(pZona, (int)datosActual[1], pViajesX);
 			double tiempoPromedio2 = buscarTiempoPromedioDeViajeEntreZonas((int)datosActual[1], pZona, pViajesX);
 
-
 			if(tiempoPromedio1 == -1 && tiempoPromedio2 == -1)
 			{			
 				double tiempoPromedio1aux = buscarTiempoPromedioDeViajeEntreZonas(pZona, (int)datosActual[0], pViajesX);
@@ -512,7 +530,8 @@ public class MVCModelo {
 					else
 					{
 						mensajes[i] = tiempoPromedio1aux + " de " + pZona + " a " + (int)datosActual[0] + " vs " + tiempoPromedio2aux + " de " + (int)datosActual[0] + " a " + pZona;
-					}				}
+					}
+				}
 			}
 			else if(pZona != datosActual[1])
 			{
