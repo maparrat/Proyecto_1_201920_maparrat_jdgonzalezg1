@@ -152,19 +152,24 @@ public class Controller {
 
 			case 3: 
 				//(2A)
-				System.out.println("--------- \nIngresar numero de mes  a consultar los mejores viajes : ");
 
+				System.out.println("--------- \nIngresar numero de mes a consultar los mejores viajes: ");
 				int mes = Integer.parseInt(lector.next());
-				System.out.println("--------- \nIngresar la cantidad de datos que desea consultar  : ");
+
+				System.out.println("--------- \nIngresar la cantidad de datos que desea consultar: ");
 				int tamaño = Integer.parseInt(lector.next());
+
 				model.data_structures.Queue respuesta = modelo.mejoresPromediosMes(tamaño, mes);
-				System.out.println("--------- \nLos mejores viajes son   : ");
-				for (int i = 0; i < respuesta.darNumeroElementos(); i++)
+
+				System.out.println("--------- \nLos mejores viajes son: ");
+
+				for(int i = 0; i < respuesta.darNumeroElementos(); i++)
 				{
 					UBERTrip y = (UBERTrip) respuesta.dequeue();
 					double[] datos = y.darDatosViaje();
-					System.out.println("--------- \n Su origen fue"+ datos[0]+" ,Su destino fue"+datos[1]+" ,Su tiempo promedio fue"+datos[3]+" ,Su desviacion estandar fue"+datos[4] );	
-				}				
+					System.out.println("--------- \n Su origen fue " + datos[0]+" , Su destino fue " + datos[1]+ " , Su tiempo promedio fue " + datos[3] + " , Su desviacion estandar fue " + datos[4]);	
+				}
+
 				break;
 
 			case 4:
@@ -278,24 +283,29 @@ public class Controller {
 				break;
 
 			case 6:
-				System.out.println("--------- \nIngresar numero de dia  a consultar los mejores viajes : ");
-
+				
+				System.out.println("--------- \nIngresar numero de dia a consultar los mejores viajes: ");
 				int dia = Integer.parseInt(lector.next());
-				System.out.println("--------- \nIngresar la cantidad de datos que desea consultar  : ");
+				
+				System.out.println("--------- \nIngresar la cantidad de datos que desea consultar: ");
 				int tamañoD = Integer.parseInt(lector.next());
+				
 				model.data_structures.Stack respuestaD = modelo.mejoresPromediosDia(tamañoD, dia);
 				System.out.println("--------- \nLos mejores viajes son   : ");
+				
 				UBERTrip[] x = new UBERTrip[respuestaD.darNumeroElementos()];
+				
 				for(int i = 0; i < respuestaD.darNumeroElementos(); i++)
 				{
 					x[i] = (UBERTrip) respuestaD.pop();
 				}
+				
 				for (int i = x.length; i>0; i--)
 				{
-
 					double[] datos = x[i].darDatosViaje();
-					System.out.println("--------- \n Su origen fue"+ datos[0]+" ,Su destino fue"+datos[1]+" ,Su tiempo promedio fue"+datos[3]+" ,Su desviacion estandar fue"+datos[4] );	
-				}				
+					System.out.println("---------\n Su origen fue " + datos[0] + " , Su destino fue " + datos[1] + " , Su tiempo promedio fue " + datos[3] + " , Su desviacion estandar fue " + datos[4]);	
+				}
+				
 				break;
 
 			case 7:
@@ -419,42 +429,53 @@ public class Controller {
 				break;
 
 			case 9:
-				System.out.println("--------- \nIngresar numero de mes  a consultar los mejores viajes : ");
-
+				
+				System.out.println("--------- \nIngresar la hora a consultar los mejores viajes: ");
 				int hora = Integer.parseInt(lector.next());
-				System.out.println("--------- \nIngresar la cantidad de datos que desea consultar  : ");
+				
+				System.out.println("--------- \nIngresar la cantidad de datos que desea consultar: ");
 				int tamañoH = Integer.parseInt(lector.next());
+				
 				model.data_structures.Queue respuestaH = modelo.mejoresPromediosMes(tamañoH, hora);
-				System.out.println("--------- \nLos mejores viajes son   : ");
+				
+				System.out.println("--------- \nLos mejores viajes son: ");
+				
 				for (int i = 0; i < respuestaH.darNumeroElementos(); i++)
 				{
 					UBERTrip z = (UBERTrip) respuestaH.dequeue();
 					double[] datos = z.darDatosViaje();
-					System.out.println("--------- \n Su origen fue"+ datos[0]+" ,Su destino fue"+datos[1]+" ,Su tiempo promedio fue"+datos[3]+" ,Su desviacion estandar fue"+datos[4] );	
-				}				
+					System.out.println("---------\n Su origen fue " + datos[0] + " , Su destino fue " + datos[1] + " , Su tiempo promedio fue " + datos[3] + " , Su desviacion estandar fue " + datos[4]);	
+				}
+				
 				break;
 
 			case 10:
 				//(3C)
+				
 				System.out.println("--------- \nIngresar numero de zona de origen que desea reporte: ");
 				int zonaA = Integer.parseInt(lector.next());
+				
 				System.out.println("--------- \nIngresar numero de zona de destino que desea reporte: ");
 				int zonaB = Integer.parseInt(lector.next());
+				
 				int[] arreglo = modelo.generarTabla(zonaA, zonaB);
-				System.out.println("--------- \nAproximación en minutos de viajes entre zona origen y zona destino.: ");
-				System.out.println("--------- \nTrimestre" +numeroTrimestre + "del 2018 detallado por cada hora del día ");
-				System.out.println("--------- \nZona de origen: "+zonaA );
-				System.out.println("--------- \nZona de destino: "+zonaB );
+				
+				System.out.println("--------- \nAproximación en minutos de viajes entre zona origen y zona destino: ");
+				System.out.println("--------- \nTrimestre " + numeroTrimestre + " del 2018 detallado por cada hora del día ");
+				System.out.println("--------- \nZona de origen: " + zonaA );
+				System.out.println("--------- \nZona de destino: " + zonaB );
 				System.out.println("--------- \nHora| # de minutos ");
+				
 				for(int i = 0; i<arreglo.length;i++)
 				{
 					String asteriscos = null;
 					if(arreglo[i] == -1)
 					{
-						System.out.println("--------- \n 0"+i+"|Hora sin viajes");
+						System.out.println("---------\n 0" + i + "|Hora sin viajes");
 					}
-					else{
-						for(int j= 0; j<arreglo[i];j++)
+					else
+					{
+						for(int j= 0; j < arreglo[i];j++)
 						{
 							if (asteriscos == null)
 							{
@@ -462,15 +483,13 @@ public class Controller {
 							}
 							else
 							{
-								asteriscos = asteriscos +"*";
+								asteriscos = asteriscos + "*";
 							}
 
 						}
-						System.out.println("--------- \n 0"+i+"|"+asteriscos);
+						System.out.println("---------\n 0" + i + "|" + asteriscos);
 					}
 				}
-
-
 
 			case 11: 
 				System.out.println("--------- \n Hasta pronto !! \n---------"); 

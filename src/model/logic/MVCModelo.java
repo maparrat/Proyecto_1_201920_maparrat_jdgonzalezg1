@@ -316,8 +316,6 @@ public class MVCModelo {
 		return viajes;
 	}
 
-
-
 	//(3A)
 	public Queue darViajesOrdenadosEnUnRangoDeZonasMes(int zona, int pZonaMenor, int pZonaMayor, int pMes)
 	{
@@ -405,8 +403,6 @@ public class MVCModelo {
 		}
 		return viajes;
 	}
-
-
 
 	//(3B)
 	public Queue darViajesOrdenadosEnUnRangoDeZonasDia(int zona, int pZonaMenor, int pZonaMayor, int pDia)
@@ -496,76 +492,88 @@ public class MVCModelo {
 		return viajes;		
 	}
 
-
 	/** 
 	 * Algoritmo tomado de Algorithms 4th edition by Robert Sedgewick and Kevin Wayne (2011)
-	 * Consultado el 06/09/19
+	 * Consultado el 15/09/19
 	 * Disponible en http://www.albertstam.com/Algorithms.pdf
 	 */
 	public Queue mejoresPromediosMes(int  TamañoArreglo, int mes )
 	{
 		Queue Respuesta = null;
-		// Pasa los arreglos de queue mes a un arreglo temporal 
-		Queue pre= queueMonthly;
+
+		//Pasa los arreglos de queue mes a un arreglo temporal 
+		Queue pre = queueMonthly;
+
 		UBERTrip[] arreglo = new UBERTrip[pre.darNumeroElementos()]; 
 
 		for(int z= 0; z< pre.darNumeroElementos(); z ++)
 		{
 			UBERTrip y =  (UBERTrip) pre.dequeue();
 			arreglo[z] = y;
-
 		}
-		// separo el arreglo por los datos del mes solicitado 
+
+		//Separo el arreglo por los datos del mes solicitado 
 		UBERTrip[] arregloMes= new UBERTrip[pre.darNumeroElementos()];
-		int posocion = 0;
-		for(int j= 0; j< arreglo.length; j++)
+
+		int posicion = 0;
+
+		for(int j = 0; j< arreglo.length; j++)
 		{
-
 			double[] x = arreglo[j].darDatosViaje();
-			if(x[2] == mes )
-			{
-				arregloMes[posocion] = arreglo[j]; 
-				posocion ++;
-			}
 
+			if(x[2] == mes)
+			{
+				arregloMes[posicion] = arreglo[j]; 
+				posicion ++;
+			}
 		}
-		// Ordenamineto por insercion
+
+		// Ordenamiento por insercion
 		for (int i=1; i < arregloMes.length; i++) 
 		{
 			UBERTrip aux = arregloMes[i];
+
 			int j = 0;
+
 			double datosArreglomes[] = arregloMes[j].darDatosViaje();
 			double datosAux[] = aux.darDatosViaje();
+
 			for (j=i-1; j >= 0 && datosArreglomes[3] > datosAux[3]; j--)
 			{
 				arregloMes[j+1] = arregloMes[j];
 			}
 			arregloMes[j+1] = aux;
 		}
-		// retorna los N elementos 
+
+		// Retorna los N elementos 
 		for(int i =0; i< TamañoArreglo; i++)
 		{
 			Respuesta.enqueue(arregloMes[i]);
 		}
+
 		return Respuesta;
 	}
 
 	public Stack mejoresPromediosDia(int  TamañoArreglo, int pdia )
 	{
 		Stack Respuesta = null;
-		// Pasa los arreglos de stack mes a un arreglo temporal 
+
+		// Pasa los arreglos de stack mes a un arreglo temporal
 		Stack pre= stackWeekly;
+
 		UBERTrip[] arreglo = new UBERTrip[pre.darNumeroElementos()]; 
 
 		for(int z= 0; z< pre.darNumeroElementos(); z ++)
 		{
 			UBERTrip y =  (UBERTrip) pre.pop();
 			arreglo[z] = y;
-
 		}
-		// separo el arreglo por los datos del mes solicitado 
+
+		// Separo el arreglo por los datos del mes solicitado
+
 		UBERTrip[] arregloDia= new UBERTrip[pre.darNumeroElementos()];
 		int posocion = 0;
+
 		for(int j= 0; j< arreglo.length; j++)
 		{
 
@@ -575,31 +583,36 @@ public class MVCModelo {
 				arregloDia[posocion] = arreglo[j]; 
 				posocion ++;
 			}
-
 		}
-		// Ordenamineto por insercion
-		for (int i=1; i < arregloDia.length; i++) 
+
+		// Ordenamiento por insercion
+		for(int i=1; i < arregloDia.length; i++) 
 		{
 			UBERTrip aux = arregloDia[i];
 			int j = 0;
+
 			double datosArreglomes[] = arregloDia[j].darDatosViaje();
 			double datosAux[] = aux.darDatosViaje();
+
 			for (j=i-1; j >= 0 && datosArreglomes[3] > datosAux[3]; j--)
 			{
 				arregloDia[j+1] = arregloDia[j];
 			}
 			arregloDia[j+1] = aux;
 		}
-		// retorna los N elementos 
+
+		// Retorna los N elementos 
 		for(int i =0; i< TamañoArreglo; i++)
 		{
 			Respuesta.push(arregloDia[i]);
 		}
 		return Respuesta; 
 	}
+
 	public Queue mejoresPromedioshora(int  TamañoArreglo, int hora )
 	{
 		Queue Respuesta = null;
+
 		// Pasa los arreglos de queue hora a un arreglo temporal 
 		Queue pre= queueHourly;
 		UBERTrip[] arreglo = new UBERTrip[pre.darNumeroElementos()]; 
@@ -608,24 +621,24 @@ public class MVCModelo {
 		{
 			UBERTrip y =  (UBERTrip) pre.dequeue();
 			arreglo[z] = y;
-
 		}
-		// separo el arreglo por los datos de la  solicitado 
+
+		// Separo el arreglo por los datos de la  solicitado 
 		UBERTrip[] arregloHora= new UBERTrip[pre.darNumeroElementos()];
 		int posocion = 0;
 		for(int j= 0; j< arreglo.length; j++)
 		{
-
 			double[] x = arreglo[j].darDatosViaje();
-			if(x[2] == hora )
+
+			if(x[2] == hora)
 			{
 				arregloHora[posocion] = arreglo[j]; 
 				posocion ++;
 			}
-
 		}
-		// Ordenamineto por insercion
-		for (int i=1; i < arregloHora.length; i++) 
+
+		// Ordenamiento por insercion
+		for(int i=1; i < arregloHora.length; i++) 
 		{
 			UBERTrip aux = arregloHora[i];
 			int j = 0;
@@ -637,30 +650,33 @@ public class MVCModelo {
 			}
 			arregloHora[j+1] = aux;
 		}
-		// retorna los N elementos 
+
+		// Retorna los N elementos 
 		for(int i =0; i< TamañoArreglo; i++)
 		{
 			Respuesta.enqueue(arregloHora[i]);
 		}
 		return Respuesta;
 	}
+
 	//(3C)
-	public int[]  generarTabla(int zonaA, int zonaB)
+	public int[] generarTabla(int zonaA, int zonaB)
 	{
 		int [] respuesta = new int[24];
 		for(int i = 0 ; i<24; i++)
 		{
 			int sumatoria = 0;
-			
+
 			Queue horario = consultarTiempoPromedioYDesviacionEstandarFranjaHoraria(zonaA, zonaB, i, ++i);
 			for (int j= 0; j < horario.darNumeroElementos() ; j++)
 			{
-			double[] datos = (double[]) horario.dequeue();
-			sumatoria = sumatoria + (int)datos[3];
+				double[] datos = (double[]) horario.dequeue();
+				sumatoria = sumatoria + (int)datos[3];
 			}
+			
 			if (sumatoria != 0){
-			double promedio = sumatoria/horario.darNumeroElementos();
-			respuesta[i]= (int)(promedio/ 60);
+				double promedio = sumatoria/horario.darNumeroElementos();
+				respuesta[i]= (int)(promedio/ 60);
 			}
 			else
 			{
