@@ -479,7 +479,15 @@ public class MVCModelo {
 		Queue Respuesta = null;
 
 		//Pasa los arreglos de queue mes a un arreglo temporal 
-		Queue pre = queueMonthly;
+		Queue f = queueMonthly;
+		Queue pre = null;
+		for(int i = 0; i< (queueMonthly.darNumeroElementos()-1); i++)
+		{
+			double[] dato= (double[]) queueMonthly.dequeue();
+			UBERTrip datof = new UBERTrip((short)dato[0],(short)dato[1], (short)dato[2],(float) dato[3],(float) dato[4], (float)dato[5],(float) dato[6]);
+			
+			pre.enqueue(datof);
+		}
 
 		UBERTrip[] arreglo = new UBERTrip[pre.darNumeroElementos()]; 
 
@@ -535,8 +543,16 @@ public class MVCModelo {
 	{
 		Stack Respuesta = null;
 
-		Pasa los arreglos de stack mes a un arreglo temporal
-		Stack pre= stackWeekly;
+		//Pasa los arreglos de stack mes a un arreglo temporal
+		Stack f = stackWeekly;
+		Stack pre = null;
+		for(int i = 0; i< (stackWeekly.darNumeroElementos()-1); i++)
+		{
+			double[] dato= (double[]) stackWeekly.pop();
+			UBERTrip datof = new UBERTrip((short)dato[0],(short)dato[1], (short)dato[2],(float) dato[3],(float) dato[4], (float)dato[5],(float) dato[6]);
+			
+			pre.push(datof);
+		}
 
 		UBERTrip[] arreglo = new UBERTrip[pre.darNumeroElementos()]; 
 
@@ -591,7 +607,15 @@ public class MVCModelo {
 		Queue Respuesta = null;
 
 		// Pasa los arreglos de queue hora a un arreglo temporal 
-		Queue pre= queueHourly;
+		Queue f = queueMonthly;
+		Queue pre = null;
+		for(int i = 0; i< (queueHourly.darNumeroElementos()-1); i++)
+		{
+			double[] dato= (double[]) queueHourly.dequeue();
+			UBERTrip datof = new UBERTrip((short)dato[0],(short)dato[1], (short)dato[2],(float) dato[3],(float) dato[4], (float)dato[5],(float) dato[6]);
+			
+			pre.enqueue(datof);
+		}
 		UBERTrip[] arreglo = new UBERTrip[pre.darNumeroElementos()]; 
 
 		for(int z= 0; z< pre.darNumeroElementos(); z ++)

@@ -7,6 +7,7 @@ import model.data_structures.Node;
 import model.data_structures.Queue;
 import model.data_structures.Stack;
 import model.logic.MVCModelo;
+import model.logic.UBERTrip;
 import view.MVCView;
 
 public class Controller {
@@ -30,6 +31,7 @@ public class Controller {
 	{
 		Scanner lector = new Scanner(System.in);
 		boolean fin = false;
+		int numeroTrimestre = 0;
 		while( !fin ){
 
 			view.printMenu();
@@ -52,7 +54,7 @@ public class Controller {
 			{
 			case 1:
 
-				int numeroTrimestre;
+				
 				
 				try
 				{
@@ -302,7 +304,7 @@ public class Controller {
 				
 				for (int m = x.length; m>0; m--)
 				{
-					double[] datos = x[i].darDatosViaje();
+					double[] datos = x[m].darDatosViaje();
 					System.out.println("---------\n Su origen fue " + datos[0] + " , Su destino fue " + datos[1] + " , Su tiempo promedio fue " + datos[3] + " , Su desviacion estandar fue " + datos[4]);	
 				}
 				
