@@ -7,7 +7,6 @@ import model.data_structures.Node;
 import model.data_structures.Queue;
 import model.data_structures.Stack;
 import model.logic.MVCModelo;
-import model.logic.UBERTrip;
 import view.MVCView;
 
 public class Controller {
@@ -31,7 +30,6 @@ public class Controller {
 	{
 		Scanner lector = new Scanner(System.in);
 		boolean fin = false;
-		int numeroTrimestre = 0;
 		while( !fin ){
 
 			view.printMenu();
@@ -54,6 +52,8 @@ public class Controller {
 			{
 			case 1:
 
+				int numeroTrimestre;
+				
 				try
 				{
 					System.out.println("--------- \nCargar archivo \nDar numero del trimestre: ");
@@ -216,10 +216,10 @@ public class Controller {
 				{
 					String[] mensajes = modelo.generarMensajesComparacion(zona3A, viajesX3A);
 
-					for (int i = 0; i < mensajes.length; i++)
+					for (int j = 0; j < mensajes.length; j++)
 					{
-						if(i == 0 || !mensajes[i].equals(mensajes[i-1]))
-							System.out.println(mensajes[i]);
+						if(j == 0 || !mensajes[j].equals(mensajes[j-1]))
+							System.out.println(mensajes[j]);
 					}
 				}
 
@@ -264,7 +264,7 @@ public class Controller {
 				}
 				else
 				{
-					int i = 1;
+					int k = 1;
 
 					System.out.println("---------\nTotal de viajes: " + respuesta1B.darNumeroElementos() + "\n---------");
 
@@ -272,11 +272,11 @@ public class Controller {
 					{
 						double[] datosActual = respuesta1B.pop();
 
-						System.out.println("Datos del viaje " + i + ":");
+						System.out.println("Datos del viaje " + k + ":");
 						System.out.println("Tiempo promedio de viaje: " + datosActual[3]);
 						System.out.println("Desviación estandar: " + datosActual[4] + "\n---------");
 
-						i++;
+						k++;
 					}
 				}
 
@@ -295,12 +295,12 @@ public class Controller {
 				
 				UBERTrip[] x = new UBERTrip[respuestaD.darNumeroElementos()];
 				
-				for(int i = 0; i < respuestaD.darNumeroElementos(); i++)
+				for(int l = 0; l < respuestaD.darNumeroElementos(); l++)
 				{
-					x[i] = (UBERTrip) respuestaD.pop();
+					x[l] = (UBERTrip) respuestaD.pop();
 				}
 				
-				for (int i = x.length; i>0; i--)
+				for (int m = x.length; m>0; m--)
 				{
 					double[] datos = x[i].darDatosViaje();
 					System.out.println("---------\n Su origen fue " + datos[0] + " , Su destino fue " + datos[1] + " , Su tiempo promedio fue " + datos[3] + " , Su desviacion estandar fue " + datos[4]);	
@@ -352,10 +352,10 @@ public class Controller {
 				{
 					String[] mensajes = modelo.generarMensajesComparacion(zona3B, viajesX3B);
 
-					for (int i = 0; i < mensajes.length; i++)
+					for (int n = 0; n < mensajes.length; n++)
 					{
-						if(i == 0 || !mensajes[i].equals(mensajes[i-1]))
-							System.out.println(mensajes[i]);
+						if(n == 0 || !mensajes[n].equals(mensajes[n-1]))
+							System.out.println(mensajes[n]);
 					}
 				}
 
@@ -410,7 +410,7 @@ public class Controller {
 				}
 				else
 				{
-					int i = 1;
+					int o = 1;
 
 					System.out.println("---------\nTotal de viajes: " + respuesta1C.darNumeroElementos() + "\n---------");
 
@@ -418,11 +418,11 @@ public class Controller {
 					{
 						double[] datosActual = respuesta1C.dequeue();
 
-						System.out.println("Datos del viaje " + i + ":");
+						System.out.println("Datos del viaje " + o + ":");
 						System.out.println("Tiempo promedio de viaje: " + datosActual[3]);
 						System.out.println("Desviación estandar: " + datosActual[4] + "\n---------");
 
-						i++;
+						o++;
 					}
 				}
 
@@ -440,7 +440,7 @@ public class Controller {
 				
 				System.out.println("--------- \nLos mejores viajes son: ");
 				
-				for (int i = 0; i < respuestaH.darNumeroElementos(); i++)
+				for (int p = 0; p < respuestaH.darNumeroElementos(); p++)
 				{
 					UBERTrip z = (UBERTrip) respuestaH.dequeue();
 					double[] datos = z.darDatosViaje();
@@ -466,16 +466,16 @@ public class Controller {
 				System.out.println("--------- \nZona de destino: " + zonaB );
 				System.out.println("--------- \nHora| # de minutos ");
 				
-				for(int i = 0; i<arreglo.length;i++)
+				for(int q = 0; q<arreglo.length;q++)
 				{
 					String asteriscos = null;
-					if(arreglo[i] == -1)
+					if(arreglo[q] == -1)
 					{
-						System.out.println("---------\n 0" + i + "|Hora sin viajes");
+						System.out.println("---------\n 0" + q + "|Hora sin viajes");
 					}
 					else
 					{
-						for(int j= 0; j < arreglo[i];j++)
+						for(int r= 0; r < arreglo[q];r++)
 						{
 							if (asteriscos == null)
 							{
@@ -487,7 +487,7 @@ public class Controller {
 							}
 
 						}
-						System.out.println("---------\n 0" + i + "|" + asteriscos);
+						System.out.println("---------\n 0" + q + "|" + asteriscos);
 					}
 				}
 

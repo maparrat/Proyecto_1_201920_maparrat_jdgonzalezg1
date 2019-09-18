@@ -120,15 +120,7 @@ public class MVCModelo {
 		{
 			if(!primeraLectura)
 			{
-				short a= (short) Double.parseDouble(line[0]);
-				short b= (short) Double.parseDouble(line[1]);
-				short c= (short) Double.parseDouble(line[2]);
-				float d = (float) Double.parseDouble(line[3]);
-				float e = (float)Double.parseDouble(line[4]);
-				float f = (float)Double.parseDouble(line[5]);
-				float g = (float)Double.parseDouble(line[6]);
-				UBERTrip dato = new UBERTrip(a, b, c,d, e, f, g);
-
+				double[] dato = {Double.parseDouble(line[0]), Double.parseDouble(line[1]), Double.parseDouble(line[2]), Double.parseDouble(line[3]), Double.parseDouble(line[4]), Double.parseDouble(line[5]), Double.parseDouble(line[6])};
 				queueMonthly.enqueue(dato);
 			}
 			primeraLectura = false;
@@ -149,14 +141,7 @@ public class MVCModelo {
 		{
 			if(!primeraLectura)
 			{
-				short a= (short) Double.parseDouble(line[0]);
-				short b= (short) Double.parseDouble(line[1]);
-				short c= (short) Double.parseDouble(line[2]);
-				float d = (float) Double.parseDouble(line[3]);
-				float e = (float)Double.parseDouble(line[4]);
-				float f = (float)Double.parseDouble(line[5]);
-				float g = (float)Double.parseDouble(line[6]);
-				UBERTrip dato = new UBERTrip(a, b, c,d, e, f, g);
+				double[] dato = {Double.parseDouble(line[0]), Double.parseDouble(line[1]), Double.parseDouble(line[2]), Double.parseDouble(line[3]), Double.parseDouble(line[4]), Double.parseDouble(line[5]), Double.parseDouble(line[6])};
 				stackWeekly.push(dato);
 			}
 			primeraLectura = false;
@@ -177,15 +162,7 @@ public class MVCModelo {
 		{
 			if(!primeraLectura)
 			{
-				short a= (short) Double.parseDouble(line[0]);
-				short b= (short) Double.parseDouble(line[1]);
-				short c= (short) Double.parseDouble(line[2]);
-				float d = (float) Double.parseDouble(line[3]);
-				float e = (float)Double.parseDouble(line[4]);
-				float f = (float)Double.parseDouble(line[5]);
-				float g = (float)Double.parseDouble(line[6]);
-				UBERTrip dato = new UBERTrip(a, b, c,d, e, f, g);
-
+				double[] dato = {Double.parseDouble(line[0]), Double.parseDouble(line[1]), Double.parseDouble(line[2]), Double.parseDouble(line[3]), Double.parseDouble(line[4]), Double.parseDouble(line[5]), Double.parseDouble(line[6])};
 				queueHourly.enqueue(dato);
 			}
 			primeraLectura = false;
@@ -558,7 +535,7 @@ public class MVCModelo {
 	{
 		Stack Respuesta = null;
 
-		// Pasa los arreglos de stack mes a un arreglo temporal
+		Pasa los arreglos de stack mes a un arreglo temporal
 		Stack pre= stackWeekly;
 
 		UBERTrip[] arreglo = new UBERTrip[pre.darNumeroElementos()]; 
@@ -569,7 +546,7 @@ public class MVCModelo {
 			arreglo[z] = y;
 		}
 
-		// Separo el arreglo por los datos del mes solicitado
+		//Separo el arreglo por los datos del mes solicitado
 
 		UBERTrip[] arregloDia= new UBERTrip[pre.darNumeroElementos()];
 		int posocion = 0;
@@ -601,7 +578,7 @@ public class MVCModelo {
 			arregloDia[j+1] = aux;
 		}
 
-		// Retorna los N elementos 
+		//Retorna los N elementos 
 		for(int i =0; i< TamañoArreglo; i++)
 		{
 			Respuesta.push(arregloDia[i]);
@@ -673,7 +650,7 @@ public class MVCModelo {
 				double[] datos = (double[]) horario.dequeue();
 				sumatoria = sumatoria + (int)datos[3];
 			}
-			
+
 			if (sumatoria != 0){
 				double promedio = sumatoria/horario.darNumeroElementos();
 				respuesta[i]= (int)(promedio/ 60);
